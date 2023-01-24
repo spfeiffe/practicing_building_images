@@ -65,24 +65,24 @@ jobs:
           with:
             sarif_file: ${{ steps.scan.outputs.sarif }}
 
-  deploy:
-    runs-on: ubuntu-latest
-    needs: scan
-  
-    steps:
-      - uses: actions/checkout@v3
-        env:
-          CG_USERNAME: ${{ secrets.CG_USERNAME }}
-        if: ${{ env.CG_USERNAME }}
-      - name: Deploy to cloud.gov
-        uses: cloud-gov/cg-cli-tools@main
-        env:
-          CG_USERNAME: ${{ secrets.CG_USERNAME }}
-        if: ${{ env.CG_USERNAME }}
-        with: 
-          cf_username: ${{ secrets.CG_USERNAME }}
-          cf_password: ${{ secrets.CG_PASSWORD }}
-          cf_org: ${{ secrets.CF_ORG }}
-          cf_space: ${{ secrets.CF_SPACE }}
-          command: cf delete Heat_CVD_UHI_Dashboard -f ; cf push -f manifest.yml
+#  deploy:
+#    runs-on: ubuntu-latest
+#    needs: scan
+#  
+#    steps:
+#      - uses: actions/checkout@v3
+#        env:
+#          CG_USERNAME: ${{ secrets.CG_USERNAME }}
+#        if: ${{ env.CG_USERNAME }}
+#      - name: Deploy to cloud.gov
+#        uses: cloud-gov/cg-cli-tools@main
+#        env:
+#          CG_USERNAME: ${{ secrets.CG_USERNAME }}
+#        if: ${{ env.CG_USERNAME }}
+#        with: 
+#          cf_username: ${{ secrets.CG_USERNAME }}
+#          cf_password: ${{ secrets.CG_PASSWORD }}
+#          cf_org: ${{ secrets.CF_ORG }}
+#          cf_space: ${{ secrets.CF_SPACE }}
+#          command: cf delete Heat_CVD_UHI_Dashboard -f ; cf push -f manifest.yml
 

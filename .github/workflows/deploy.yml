@@ -7,7 +7,7 @@ env:
 on: 
   push:
     branches:
-      - docker-container
+      - main
 
 jobs:
   build-and-push-image:
