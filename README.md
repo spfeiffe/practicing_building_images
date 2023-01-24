@@ -1,1 +1,0 @@
-# practicing_building_images
